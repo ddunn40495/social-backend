@@ -77,4 +77,26 @@ router.post("/addfriend/:id", async (req, res) => {
   }
 });
 
+router.post("/addboard/:id", upload.none(), async (req, res) => {
+  try {
+    const params = {
+      name: req.body.name,
+    };
+    console.log(params.name);
+    const newBoard = await db.Board.create({ name: params.name });
+    console.log(newBoard);
+    const user = await db.User.findById(req.params.id);
+
+    await user.board.push(newBoard._id);
+    await user.save();
+
+    console.log(user);
+
+    res.status(200).json(newBoard);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json("err");
+  }
+});
+
 module.exports = router;

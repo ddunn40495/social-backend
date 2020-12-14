@@ -14,7 +14,7 @@ mongoose
   });
 
 module.exports = {
-  Item: require("./GroupSchema"),
-  Order: require("./BoardSchema"),
+  Group: require("./GroupSchema"),
+  Board: require("./BoardSchema"),
   User: require("./UserSchema"),
 };
